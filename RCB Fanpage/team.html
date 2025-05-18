@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RCB Team Stats</title>
+    <link rel="stylesheet" href="stats.css" />
+  </head>
+  <body>
+    <header>
+      <div class="navbar">
+        <img src="images/logo.png" alt="RCB Logo" class="logo" />
+        <nav>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="team.html">Stats</a></li>
+            <li><a href="players.html">Players</a></li>
+            <li><a href="merchandise.html">Merchandise</a></li>
+            <li><a href="tickets.html">Tickets</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <section class="rcb-squad">
+      <h2>🚩 RCB Squad – IPL 2025</h2>
+
+      <div class="filters">
+        <button onclick="filterPlayers('all')" class="filter-btn active">
+          All
+        </button>
+        <button onclick="filterPlayers('batter')" class="filter-btn">
+          Batters
+        </button>
+        <button onclick="filterPlayers('allrounder')" class="filter-btn">
+          All-rounders
+        </button>
+        <button onclick="filterPlayers('bowler')" class="filter-btn">
+          Bowlers
+        </button>
+      </div>
+
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Search players..."
+        onkeyup="searchPlayers()"
+      />
+
+      <div class="player-grid">
+        <!-- BATTERS -->
+        <div class="player-card batter" onclick="toggleStats(this)">
+          <img
+            src="https://documents.iplt20.com/ipl/IPLHeadshot2025/2.png"
+            class="player-img"
+            alt="Virat Kohli"
+          />
+          <h3>Virat Kohli</h3>
+          <p class="brief">Batter</p>
+          <div class="stats hidden">
+            <p>Matches: 12</p>
+            <p>Runs: 542</p>
+            <p>Average: 49.27</p>
+            <p>Strike Rate: 141.3</p>
+            <p>50s: 5 | 100s: 1</p>
+          </div>
+        </div>
+
+        <div class="player-card batter" onclick="toggleStats(this)">
+          <img
+            src="https://documents.iplt20.com/ipl/IPLHeadshot2025/597.png"
+            class="player-img"
+            alt="Rajat Patidar"
+          />
+          <h3>Rajat Patidar (C)</h3>
+          <p class="brief">Batter</p>
+          <div class="stats hidden">
+            <p>Matches: 11</p>
+            <p>Runs: 398</p>
+            <p>Average: 36.2</p>
+            <p>Strike Rate: 134.5</p>
+            <p>50s: 3</p>
+          </div>
+        </div>
+
+        <div class="player-card batter" onclick="toggleStats(this)">
+          <img
+            src="https://documents.iplt20.com/ipl/IPLHeadshot2025/1220.png"
+            class="player-img"
+            alt="Phil Salt"
+          />
+          <h3>Phil Salt (WK)</h3>
+          <p class="brief">Batter</p>
+          <div class="stats hidden">
+            <p>Matches: 10</p>
+            <p>Runs: 324</p>
+            <p>Average: 32.4</p>
+            <p>Strike Rate: 152.1</p>
+          </div>
+        </div>
+
+        <!-- ALL-ROUNDERS -->
+        <div class="player-card allrounder" onclick="toggleStats(this)">
+          <img
+            src="https://documents.iplt20.com/ipl/IPLHeadshot2025/183.png"
+            class="player-img"
+            alt="Liam Livingstone"
+          />
+          <h3>Liam Livingstone</h3>
+          <p class="brief">All-rounder</p>
+          <div class="stats hidden">
+            <p>Runs: 312</p>
+            <p>Strike Rate: 168.5</p>
+            <p>Wickets: 6</p>
+          </div>
+        </div>
+
+        <div class="player-card allrounder" onclick="toggleStats(this)">
+          <img
+            src="https://documents.iplt20.com/ipl/IPLHeadshot2025/17.png"
+            class="player-img"
+            alt="Krunal Pandya"
+          />
+          <h3>Krunal Pandya</h3>
+          <p class="brief">All-rounder</p>
+          <div class="stats hidden">
+            <p>Runs: 194</p>
+            <p>Wickets: 8</p>
+            <p>Economy: 7.1</p>
+          </div>
+        </div>
+
+        <!-- BOWLERS -->
+        <div class="player-card bowler" onclick="toggleStats(this)">
+          <img
+            src="https://documents.iplt20.com/ipl/IPLHeadshot2025/36.png"
+            class="player-img"
+            alt="Josh Hazlewood"
+          />
+          <h3>Josh Hazlewood</h3>
+          <p class="brief">Bowler</p>
+          <div class="stats hidden">
+            <p>Matches: 10</p>
+            <p>Wickets: 14</p>
+            <p>Economy: 7.6</p>
+          </div>
+        </div>
+
+        <div class="player-card bowler" onclick="toggleStats(this)">
+          <img
+            src="https://documents.iplt20.com/ipl/IPLHeadshot2025/15.png"
+            class="player-img"
+            alt="Bhuvneshwar Kumar"
+          />
+          <h3>Bhuvneshwar Kumar</h3>
+          <p class="brief">Bowler</p>
+          <div class="stats hidden">
+            <p>Matches: 12</p>
+            <p>Wickets: 16</p>
+            <p>Economy: 7.2</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p>&copy; 2025 Royal Challengers Bangalore. All Rights Reserved.</p>
+    </footer>
+    <script>
+      // Toggle player stats on card click
+      function toggleStats(card) {
+        const statBox = card.querySelector(".stats");
+        statBox.classList.toggle("hidden");
+      }
+
+      // Filter by player type
+      function filterPlayers(role) {
+        const cards = document.querySelectorAll(".player-card");
+        const buttons = document.querySelectorAll(".filter-btn");
+
+        // Update button style
+        buttons.forEach((btn) => btn.classList.remove("active"));
+        event.target.classList.add("active");
+
+        // Show/hide cards
+        cards.forEach((card) => {
+          if (role === "all" || card.classList.contains(role)) {
+            card.style.display = "block";
+          } else {
+            card.style.display = "none";
+          }
+        });
+      }
+
+      // Search players by name
+      function searchPlayers() {
+        const input = document
+          .getElementById("searchInput")
+          .value.toLowerCase();
+        const cards = document.querySelectorAll(".player-card");
+
+        cards.forEach((card) => {
+          const name = card.querySelector("h3").textContent.toLowerCase();
+          card.style.display = name.includes(input) ? "block" : "none";
+        });
+      }
+    </script>
+  </body>
+</html>

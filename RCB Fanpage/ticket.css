@@ -1,0 +1,92 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  text-align: center;
+  padding: 20px;
+}
+
+header {
+  background-color: #da1818;
+  padding: 10px 20px;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  width: 100px;
+  border-radius: 80%;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+h1 {
+  color: #d50000;
+  margin-bottom: 30px;
+}
+
+.ticket-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.ticket-card {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 280px;
+  padding: 20px;
+  text-align: left;
+}
+
+.ticket-card h2 {
+  color: #d50000;
+  margin-bottom: 10px;
+}
+
+.ticket-card p {
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+.ticket-card button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #d50000;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.ticket-card button:hover {
+  background-color: #b30000;
+}
+button {
+  transition: transform 0.3;
+}
+button:hover {
+  transform: scale(1.05);
+}
+footer {
+  background-color: #111;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}

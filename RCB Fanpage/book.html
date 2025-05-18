@@ -1,0 +1,214 @@
+<!-- payment.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>RCB Ticket Payment</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <style>
+      body {
+        font-family: "Segoe UI", sans-serif;
+        background-color: #f2f2f2;
+        margin: 0;
+        padding: 0;
+      }
+
+      .container {
+        max-width: 600px;
+        background-color: #ffffff;
+        margin: 40px auto;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+      }
+
+      h1 {
+        color: #d50000;
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      form label {
+        display: block;
+        margin: 12px 0 5px;
+        font-weight: bold;
+      }
+
+      form input[type="text"],
+      form input[type="number"],
+      form input[type="email"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+      }
+
+      .radio-group {
+        display: flex;
+        gap: 20px;
+        margin-bottom: 15px;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      button[type="submit"],
+      .download-btn {
+        background-color: #d50000;
+        color: white;
+        padding: 12px;
+        border: none;
+        width: 100%;
+        font-size: 16px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      button[type="submit"]:hover,
+      .download-btn:hover {
+        background-color: #b00000;
+      }
+
+      #success-msg {
+        text-align: center;
+        color: green;
+        font-size: 20px;
+        margin-top: 30px;
+      }
+
+      .download-btn {
+        margin-top: 20px;
+        background-color: #007bff;
+      }
+
+      .download-btn:hover {
+        background-color: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Payment for <span id="match-name"></span></h2>
+      <form id="payment-form" onsubmit="handlePayment(event)">
+        <label for="tickets">Number of Tickets:</label>
+        <input
+          type="number"
+          id="tickets"
+          name="tickets"
+          min="1"
+          max="10"
+          required
+        />
+
+        <label>Payment Method:</label>
+        <div class="payment-methods">
+          <input
+            type="radio"
+            name="payment"
+            value="credit"
+            onchange="showPaymentFields()"
+            required
+          />
+          Credit Card
+          <input
+            type="radio"
+            name="payment"
+            value="debit"
+            onchange="showPaymentFields()"
+          />
+          Debit Card
+          <input
+            type="radio"
+            name="payment"
+            value="upi"
+            onchange="showPaymentFields()"
+          />
+          UPI
+        </div>
+
+        <div id="card-fields" class="hidden">
+          <label>Card Number:</label>
+          <input type="text" placeholder="1234 5678 9012 3456" />
+          <label>Expiry Date:</label>
+          <input type="text" placeholder="MM/YY" />
+          <label>CVV:</label>
+          <input type="text" placeholder="123" />
+        </div>
+
+        <div id="upi-field" class="hidden">
+          <label>UPI ID:</label>
+          <input type="text" placeholder="yourname@upi" />
+        </div>
+
+        <button type="submit">Confirm Payment</button>
+      </form>
+
+      <div class="hidden" id="success-msg">
+        Payment successful! Your ticket is confirmed 🎟️
+      </div>
+    </div>
+
+    <script>
+      const urlParams = new URLSearchParams(window.location.search);
+      const matchName = decodeURIComponent(urlParams.get("match"));
+      document.getElementById("match-name").textContent = matchName;
+
+      function showPaymentFields() {
+        const payment = document.querySelector(
+          'input[name="payment"]:checked'
+        ).value;
+        document
+          .getElementById("card-fields")
+          .classList.toggle("hidden", payment === "upi");
+        document
+          .getElementById("upi-field")
+          .classList.toggle("hidden", payment !== "upi");
+      }
+
+      function handlePayment(event) {
+        event.preventDefault();
+        document.getElementById("payment-form").style.display = "none";
+        const successMsg = document.getElementById("success-msg");
+        successMsg.style.display = "block";
+
+        // Add download button after success
+        const downloadBtn = document.createElement("button");
+        downloadBtn.textContent = "Download Ticket PDF";
+        downloadBtn.style.marginTop = "20px";
+        downloadBtn.style.padding = "12px";
+        downloadBtn.style.width = "100%";
+        downloadBtn.style.backgroundColor = "#007bff";
+        downloadBtn.style.color = "white";
+        downloadBtn.style.border = "none";
+        downloadBtn.style.fontSize = "16px";
+        downloadBtn.style.borderRadius = "5px";
+        downloadBtn.onclick = generatePDF;
+        successMsg.appendChild(downloadBtn);
+      }
+
+      async function generatePDF() {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+
+        const ticketCount = document.getElementById("tickets").value;
+
+        doc.setFontSize(20);
+        doc.setTextColor(213, 0, 0);
+        doc.text("RCB Match Ticket", 70, 20);
+
+        doc.setFontSize(14);
+        doc.setTextColor(0, 0, 0);
+        doc.text(`Match: ${matchName}`, 20, 40);
+        doc.text(`Tickets: ${ticketCount}`, 20, 50);
+        doc.text(`Status: Confirmed`, 20, 60);
+        doc.text(`Issued On: ${new Date().toLocaleDateString()}`, 20, 70);
+
+        doc.save("RCB_Ticket.pdf");
+      }
+    </script>
+  </body>
+</html>

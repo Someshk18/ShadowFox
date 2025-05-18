@@ -1,0 +1,118 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  font-family: Arial, sans-serif;
+  background-color: #da1a32;
+}
+
+.logo {
+  width: 100px;
+  border-radius: 80%;
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+  font-weight: bolder;
+}
+.rcb-squad {
+  padding: 2rem;
+  background-color: #fff;
+  text-align: center;
+}
+
+.filters {
+  margin-bottom: 1.5rem;
+}
+.filter-btn {
+  background-color: #da1a32;
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  margin: 0.3rem;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+.filter-btn:hover,
+.filter-btn.active {
+  background-color: #b71c1c;
+}
+
+/* Search Bar */
+#searchInput {
+  padding: 0.5rem 1rem;
+  border: 2px solid #da1a32;
+  border-radius: 25px;
+  width: 80%;
+  max-width: 500px;
+  margin: 1rem auto 2rem;
+  display: block;
+  font-size: 1rem;
+}
+
+/* Player Grid */
+.player-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+/* Player Cards */
+.player-card {
+  background: #f9f9f9;
+  border: 2px solid #da1a32;
+  border-radius: 10px;
+  width: 220px;
+  padding: 1rem;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  text-align: center;
+}
+.player-card:hover {
+  transform: scale(1.05);
+  background-color: #fff3f3;
+}
+.player-card h3 {
+  margin-bottom: 0.2rem;
+  color: #b71c1c;
+}
+.player-card .brief {
+  font-weight: 600;
+  color: #444;
+}
+
+/* Player Image */
+.player-img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+}
+
+/* Stats Toggle */
+.stats {
+  margin-top: 0.5rem;
+  text-align: left;
+}
+.hidden {
+  display: none;
+}
+
+footer {
+  background-color: #111;
+  color: white;
+  text-align: center;
+  padding: 1.5rem 1rem;
+}
